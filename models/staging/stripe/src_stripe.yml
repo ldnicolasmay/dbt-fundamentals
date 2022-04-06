@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: stripe
-    description: A clone of a Postgres application database.
+    description: A clone of a Postgres application database
     database: dbt-tutorial
     schema: stripe
     tables:
@@ -15,7 +15,7 @@ sources:
           error_after: {count: 24, period: hour}
         columns:
           - name: id
-            description: Primary key for Stripe payments.
+            description: Primary key for Stripe payments
             tests:
               - unique
               - not_null
