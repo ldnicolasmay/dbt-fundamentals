@@ -2,24 +2,31 @@ version: 2
 
 sources:
   - name: jaffle_shop
+    description: A clone of a Postgres application database.
     database: dbt-tutorial
     schema: jaffle_shop
     tables:
+      # customers table
       - name: customers
+        description: Raw customers data.
         identifier: customers
+        columns:
+          - name: id
+            description: Primary key for customers.
+            tests:
+              - unique
+              - not_null
+      # orders table
       - name: orders
+        description: Raw orders data.
         identifier: orders
         loaded_at_field: _etl_loaded_at
         freshness:
           warn_after: {count: 12, period: hour}
           error_after: {count: 24, period: hour}
-  - name: stripe
-    database: dbt-tutorial
-    schema: stripe
-    tables:
-      - name: payment
-        identifier: payment
-        loaded_at_field: _batched_at
-        freshness:
-          warn_after: {count: 12, period: hour}
-          error_after: {count: 24, period: hour}
+        columns:
+          - name: id
+            description: Primary key for orders.
+            tests:
+              - unique
+              - not_null
